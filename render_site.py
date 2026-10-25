@@ -1,10 +1,12 @@
 """Render completed episodes as a domain-independent static site."""
 import html
 import json
+import os
 import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+REPOSITORY_URL = os.environ.get('RADIO_T_REPOSITORY_URL', 'https://github.com/barsv/radio-t-txt').strip()
 
 
 def e(value):
@@ -29,7 +31,8 @@ def masthead(home):
 
 
 def footer(source):
-    return f'<footer class="footer">Неофициальный текстовый архив. Расшифровка и резюме созданы автоматически.<br><a href="{e(source)}">Оригинал — подкаст Радио-Т</a>. Формулировки могут отличаться от записи.</footer>'
+    repository_link = f'<br><a href="{e(REPOSITORY_URL)}">Исходный код на GitHub ↗</a>' if REPOSITORY_URL else ''
+    return f'<footer class="footer">Неофициальный текстовый архив. Расшифровка и резюме созданы автоматически.<br><a href="{e(source)}">Оригинал — подкаст Радио-Т</a>. Формулировки могут отличаться от записи.{repository_link}</footer>'
 
 
 def episode_page(data, summaries):
