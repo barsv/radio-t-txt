@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+output/
+__pycache__/
+state/
+dist/
+*.log
+dist*/
+STATUS.md
